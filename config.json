@@ -1,0 +1,7 @@
+{
+	"client_id" : "abc",
+	"token" : "abc",
+	"bot_id" : "abc",
+	"default_game" : "abc",
+	"EnableBotOnStart" : false
+}
