@@ -4,6 +4,9 @@ var config = require('./config.json');
 var fs = require('fs');
 var colors = require('colors');
 
+var PlaceHolderStrings = ["placeholder", "abc", "asdf"];
+var BotOnline = false; // UGLYYYYYYY
+var fox = new Discord.Client();
 /* Discord bot variables
 var client_id = "",
     token = "",
@@ -29,23 +32,27 @@ fs.stat('config.json', function(err, stat) {
   }
 })
 // CLI variables
+var startmsg = "discord-cli, version 0.1"; // Also used when 'ver' is run in the CLI!
 var delimiter = "discord#"; // Customize your CLI the way you want it!
 
 // CLI commands (wip)
-/* vorpal
+vorpal
   .command('start', 'Starts the Discord bot')
   .action(function(args, callback) {
     // Sanity checks
-    if token == "" {
-      this.log("There is no bot token set.");
+    if (config.token == "abc") { // TODO: Make this check PlaceHolderStrings to see if the string is a valid token
+      this.log("There is a placeholder string in place of your token. Please correct this.".yellow);
       this.log("Can't continue, going back to CLI...");
       callback();
     } else {
-      this.log("working on this");
+      // this.log("working on this");
+      this.log("Token check passed! Please wait...".green);
+      this.log("Currently at this time, you cannot shut off your bot after it is started. This functionality will be implemented later.".red);
+      fox.loginWithToken(config.token);
+      var BotOnline == true // EUGH
       callback();
     }
   });
-*/
 
 vorpal
   .command('configlist', 'debug, lists config variables from config.json')
@@ -58,10 +65,32 @@ vorpal
     callback();
   });
 
+vorpal
+  .command('servers', 'List all the servers Fox is connected to')
+  .action(function(args, callback) {
+    this.log(fox.servers);
+  });
+
+vorpal
+  .command('stop', 'Stops the bot')
+  .action(functions(args, callback) {
+    fox.logout(function (error) {
+      this.log("There was a problem stopping the bot.".red);
+    });
+  });
+
 // Set CLI delimiter and do .show();
 vorpal
   .delimiter (delimiter)
   .show();
+
+// Actual Discord bot commands
+
+fox.on("message", function(message) {
+  if (message.content == "ping") {
+    fox.reply(message, "pong");
+  }
+});
 
 /*
 TODO:
