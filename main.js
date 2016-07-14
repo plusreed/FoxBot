@@ -79,6 +79,12 @@ vorpal
     });
   });
 
+vorpal
+  .command('ver', 'Shows version of CLI')
+  .action(functions(args, callback) {
+    this.log(startmsg);
+  });
+
 // Set CLI delimiter and do .show();
 vorpal
   .delimiter (delimiter)
