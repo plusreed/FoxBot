@@ -49,7 +49,7 @@ vorpal
       this.log("Token check passed! Please wait...".green);
       this.log("Currently at this time, you cannot shut off your bot after it is started. This functionality will be implemented later.".red);
       fox.loginWithToken(config.token);
-      var BotOnline == true // EUGH
+      var BotOnline = true // EUGH
       callback();
     }
   });
