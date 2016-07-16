@@ -1,7 +1,6 @@
 var vorpal = require('vorpal')();
 var Discord = require('discord.js');
 var config = require('./config.json');
-var fs = require('fs');
 var colors = require('colors');
 
 var PlaceHolderStrings = ["placeholder", "abc", "asdf"]; // unused atm, will be used later
@@ -20,18 +19,6 @@ if (config.EnableBotOnStart == false) {
   console.log("You have configured your bot to not start on execution of this script.");
   console.log("Start your bot by typing 'start' at the CLI.");
 }
-/*
-fs.stat('config.json', function(err, stat) {
-  if(err == null) {
-    // console.log("found config.json!");
-  } else if(err.code == 'ENOENT') {
-    // config.json doesn't exist, warn user
-    console.log('WARNING!'.red);
-    console.log('I am unable to find config.json...');
-    console.log('Please check that config.json exists.');
-  }
-})
-*/
 
 // CLI variables
 var verString = "Fox CLI, version 0.1\nFox CLI is the command line interface for managing your Discord bot."; // If you would like to change the text that is said when you run "ver" in console, this is the place!
