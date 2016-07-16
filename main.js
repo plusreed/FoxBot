@@ -5,7 +5,7 @@ var fs = require('fs');
 var colors = require('colors');
 
 var PlaceHolderStrings = ["placeholder", "abc", "asdf"]; // unused atm, will be used later
-var BotOnline = false; // UGLYYYYYYY
+var BotOnline = config.EnableBotOnStart; // UGLYYYYYYY
 var fox = new Discord.Client();
 /* Discord bot variables
 var client_id = "",
@@ -20,7 +20,7 @@ if (config.EnableBotOnStart == false) {
   console.log("You have configured your bot to not start on execution of this script.");
   console.log("Start your bot by typing 'start' at the CLI.");
 }
-// useless check, legacy code
+/*
 fs.stat('config.json', function(err, stat) {
   if(err == null) {
     // console.log("found config.json!");
@@ -31,6 +31,7 @@ fs.stat('config.json', function(err, stat) {
     console.log('Please check that config.json exists.');
   }
 })
+*/
 
 // CLI variables
 var verString = "Fox CLI, version 0.1\nFox CLI is the command line interface for managing your Discord bot."; // If you would like to change the text that is said when you run "ver" in console, this is the place!
@@ -100,6 +101,18 @@ vorpal
     this.log("The current prefix is: " + config.prefix);
     callback();
   });
+vorpal.find('exit').remove();
+vorpal
+  .command('exit', 'Exit CLI') // Replacement exit command.
+  .action(function(args, callback) {
+    this.log("Logging out of the bot...");
+    fox.logout(function(error) {
+      this.log("Couldn't log out.");
+    });
+    var BotOnline = false;
+    this.log("Exiting CLI...");
+    process.exit();
+  });
 
 // Set CLI delimiter and do .show();
 vorpal
@@ -126,14 +139,14 @@ fox.on("message", function(message) {
 
 fox.on("message", function(message) {
   if (message.content == config.prefix + "info") {
-    fox.reply(message, "Hi, I'm the new **Fox**. I'm a bot written in **Node.js** using **discord.js**.\nI'm currently **" + config.ver + "** and my prefix is **" + config.prefix + "**. Fox CLI is currently at v0.1.\nI'll put all the commands in a separate command later please don't kill me");
+    fox.reply(message, "Hi, I'm the new **Fox**. I'm a bot written in **Node.js** using **discord.js**.\nI'm currently **" + config.ver + "** and my prefix is **" + config.prefix + "**. Fox CLI is currently at v0.1.\nIf you need help with this bot, contact Reed#0681, the creator.");
     // fox.reply(message, "Hi, I'm the new Fox. **formatting asdf** _italics asdf_ \n newlines!");
   }
 });
 
 fox.on("message", function(message) {
   if (message.content == config.prefix + "git") {
-    fox.reply(message, "Thanks for your interest in my source code! Unfortunately, it's not public at the moment.\nDon't worry though! All changes to me are pushed to a private GitHub repo, which will be made public when this bot is in a more complete state.");
+    fox.reply(message, "You can see my (WIP) source code at https://github.com/plusreed/NodeBot");
   }
 });
 
@@ -150,6 +163,16 @@ fox.on("message", function(message) {
         fox.reply(message, "owo whats this"); // Please help me
       });
       var BotOnline = false; // since fox.logout() should not ever fail, this'll do
+    }
+  }
+});
+
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "set") {
+    if (message.author.id == config.owner_id) {
+      fox.reply(message, "You cannot change the config.json from Discord for safety reasons. Please use the CLI.");
+    } else {
+      fox.reply(message, "**You do not have permission to run this command.**");
     }
   }
 });
