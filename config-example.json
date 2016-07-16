@@ -4,5 +4,7 @@
 	"bot_id" : "abc",
 	"default_game" : "abc",
 	"owner_id" : "abc",
+	"prefix" : "^",
+	"ver" : "v0.1",
 	"EnableBotOnStart" : false
 }

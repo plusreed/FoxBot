@@ -31,6 +31,7 @@ fs.stat('config.json', function(err, stat) {
     console.log('Please check that config.json exists.');
   }
 })
+
 // CLI variables
 var verString = "Fox CLI, version 0.1\nFox CLI is the command line interface for managing your Discord bot."; // If you would like to change the text that is said when you run "ver" in console, this is the place!
 var delimiter = "discord#"; // Customize your CLI the way you want it!
@@ -93,6 +94,13 @@ vorpal
     callback();
   });
 
+vorpal
+  .command('prefix', 'Prints the prefix currently being used')
+  .action(function(args, callback) {
+    this.log("The current prefix is: " + config.prefix);
+    callback();
+  });
+
 // Set CLI delimiter and do .show();
 vorpal
   .delimiter (delimiter)
@@ -101,23 +109,30 @@ vorpal
 // Actual Discord bot commands
 
 fox.on("message", function(message) {
-  if (message.content == "ping") {
+  if (message.content == config.prefix + "ping") {
     fox.reply(message, "pong");
   }
 });
 
 fox.on("message", function(message) {
-  if (message.content == "ownertest") {
+  if (message.content == config.prefix + "ownertest") {
     if (message.author.id == config.owner_id) {
-      fox.reply(message, "You're an owner! (Your ID matches with the one in config.json)");
+      fox.reply(message, "You're an owner! (Your ID matches with the one currently set in config.json)");
     } else {
       fox.reply(message, "I couldn't find you in config.json :(");
     }
   }
 });
 
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "info") {
+    fox.reply(message, "Hi, I'm the new **Fox**. I'm a bot written in **Node.js** using **discord.js**.\nI'm currently **" + config.ver + "** and my prefix is **" + config.prefix + "**.\nI'll put all the commands in a separate command later please don't kill me");
+    // fox.reply(message, "Hi, I'm the new Fox. **formatting asdf** _italics asdf_ \n newlines!");
+  }
+});
 /*
 TODO:
 - Add a command to turn off the bot (maintenance maybe?) -- DONE
 - Allow config of variables from the CLI (discord# set client_id <client id>)
+- Configure prefix in config.json
 */
