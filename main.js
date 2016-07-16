@@ -32,7 +32,7 @@ fs.stat('config.json', function(err, stat) {
   }
 })
 // CLI variables
-var startmsg = "Fox CLI, version 0.1"; // Also used when 'ver' is run in the CLI!
+var verString = "Fox CLI, version 0.1\nFox CLI is the command line interface for managing your Discord bot."; // If you would like to change the text that is said when you run "ver" in console, this is the place!
 var delimiter = "discord#"; // Customize your CLI the way you want it!
 
 // CLI commands (wip)
@@ -89,7 +89,7 @@ vorpal
 vorpal
   .command('ver', 'Shows version of CLI')
   .action(function(args, callback) {
-    this.log(startmsg);
+    this.log(verString);
     callback();
   });
 
@@ -106,8 +106,18 @@ fox.on("message", function(message) {
   }
 });
 
+fox.on("message", function(message) {
+  if (message.content == "ownertest") {
+    if (message.author.id == config.owner_id) {
+      fox.reply(message, "You're an owner! (Your ID matches with the one in config.json)");
+    } else {
+      fox.reply(message, "I couldn't find you in config.json :(");
+    }
+  }
+});
+
 /*
 TODO:
-- Add a command to turn off the bot (maintenance maybe?)
+- Add a command to turn off the bot (maintenance maybe?) -- DONE
 - Allow config of variables from the CLI (discord# set client_id <client id>)
 */
