@@ -176,10 +176,3 @@ fox.on("message", function(message) {
     }
   }
 });
-
-/*
-TODO:
-- Add a command to turn off the bot (maintenance maybe?) -- DONE
-- Allow config of variables from the CLI (discord# set client_id <client id>)
-- Configure prefix in config.json
-*/
