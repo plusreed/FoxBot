@@ -142,9 +142,12 @@ fox.on("message", function(message) {
     if (message.author.id != config.owner_id) {
       fox.reply(message, "I'm a robot! I'm immortal! You can't kill me!");
     } else {
-      fox.reply(message, "Logging out of Discord (to start me again, please start me via the CLI)");
+      // Apparently discord.js will log out before sending a reply. Sucks.
+      // fox.reply(message, "Logging out of Discord (to start me again, please start me via the CLI)");
       fox.logout(function(error) {
-        // O_o
+        // Welp looks like I'm going to be disgraced by the worst message ever
+        var BotOnline = true;
+        fox.reply(message, "owo whats this"); // Please help me
       });
       var BotOnline = false; // since fox.logout() should not ever fail, this'll do
     }
