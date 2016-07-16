@@ -126,10 +126,31 @@ fox.on("message", function(message) {
 
 fox.on("message", function(message) {
   if (message.content == config.prefix + "info") {
-    fox.reply(message, "Hi, I'm the new **Fox**. I'm a bot written in **Node.js** using **discord.js**.\nI'm currently **" + config.ver + "** and my prefix is **" + config.prefix + "**.\nI'll put all the commands in a separate command later please don't kill me");
+    fox.reply(message, "Hi, I'm the new **Fox**. I'm a bot written in **Node.js** using **discord.js**.\nI'm currently **" + config.ver + "** and my prefix is **" + config.prefix + "**. Fox CLI is currently at v0.1.\nI'll put all the commands in a separate command later please don't kill me");
     // fox.reply(message, "Hi, I'm the new Fox. **formatting asdf** _italics asdf_ \n newlines!");
   }
 });
+
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "git") {
+    fox.reply(message, "Thanks for your interest in my source code! Unfortunately, it's not public at the moment.\nDon't worry though! All changes to me are pushed to a private GitHub repo, which will be made public when this bot is in a more complete state.");
+  }
+});
+
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "die") {
+    if (message.author.id != config.owner_id) {
+      fox.reply(message, "I'm a robot! I'm immortal! You can't kill me!");
+    } else {
+      fox.reply(message, "Logging out of Discord (to start me again, please start me via the CLI)");
+      fox.logout(function(error) {
+        // O_o
+      });
+      var BotOnline = false; // since fox.logout() should not ever fail, this'll do
+    }
+  }
+});
+
 /*
 TODO:
 - Add a command to turn off the bot (maintenance maybe?) -- DONE
