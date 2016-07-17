@@ -7,5 +7,6 @@
 	"prefix" : "^",
 	"ver" : "v0.1",
 	"blacklist" : "soon",
+	"PollForMessages" : false,
 	"EnableBotOnStart" : false
 }

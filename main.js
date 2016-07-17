@@ -20,6 +20,9 @@ if (config.EnableBotOnStart == false) {
   console.log("Start your bot by typing 'start' at the CLI.");
 }
 
+function Log(logmsg) {
+  vorpal.log(logmsg);
+}
 // CLI variables
 var verString = "Fox CLI, version 0.1.1\nFox CLI is the command line interface for managing your Discord bot."; // If you would like to change the text that is said when you run "ver" in console, this is the place!
 var delimiter = "discord#"; // Customize your CLI the way you want it!
@@ -121,9 +124,19 @@ vorpal
 
 // Actual Discord bot commands
 
+// Message polling (This'll be less ugly later)
+fox.on("message", function(message) {
+  if (config.PollForMessages == true) {
+    Log(message.author.id + ": " + message.content);
+  } else {
+    Log("Message polling is disabled in config.json.");
+  }
+});
+
 fox.on("message", function(message) {
   if (message.content == config.prefix + "ping") {
     fox.reply(message, "pong");
+    Log("^ping sent by uid " + message.author.id);
   }
 });
 
@@ -131,15 +144,18 @@ fox.on("message", function(message) {
   if (message.content == config.prefix + "ownertest") {
     if (message.author.id == config.owner_id) {
       fox.reply(message, "You're an owner! (Your ID matches with the one currently set in config.json)");
+      Log("^ownertest sent by uid " + message.author.id + ", found in config.json");
     } else {
       fox.reply(message, "I couldn't find you in config.json :(");
+      Log("^ownertest sent by uid " + message.author.id + ", failed to find in config.json");
     }
   }
 });
 
 fox.on("message", function(message) {
   if (message.content == config.prefix + "info") {
-    fox.reply(message, "Hi, I'm the new **Fox**. I'm a bot written in **Node.js** using **discord.js**.\nI'm currently **" + config.ver + "** and my prefix is **" + config.prefix + "**. Fox CLI is currently at v0.1.\nIf you need help with this bot, contact Reed#0681, the creator.");
+    fox.reply(message, "Hi, I'm the new **Fox**. I'm a bot written in **Node.js** using **discord.js**.\nI'm currently **" + config.ver + "** and my prefix is **" + config.prefix + "**. Fox CLI is currently at v0.1.1.\nIf you need help with this bot, contact Reed#0681, the creator.");
+    Log("^info sent by uid " + message.author.id);
     // fox.reply(message, "Hi, I'm the new Fox. **formatting asdf** _italics asdf_ \n newlines!");
   }
 });
@@ -147,6 +163,7 @@ fox.on("message", function(message) {
 fox.on("message", function(message) {
   if (message.content == config.prefix + "git") {
     fox.reply(message, "You can see my (WIP) source code at https://github.com/plusreed/NodeBot");
+    Log("^git sent by uid " + message.author.id);
   }
 });
 
@@ -154,6 +171,7 @@ fox.on("message", function(message) {
   if (message.content == config.prefix + "die") {
     if (message.author.id != config.owner_id) {
       fox.reply(message, "I'm a robot! I'm immortal! You can't kill me!");
+      Log("^die sent by uid " + message.author.id + ", failed as uid doesn't match owner_id in config.json");
     } else {
       // Apparently discord.js will log out before sending a reply. Sucks.
       // fox.reply(message, "Logging out of Discord (to start me again, please start me via the CLI)");
@@ -163,6 +181,7 @@ fox.on("message", function(message) {
         fox.reply(message, "owo whats this"); // Please help me
       });
       var BotOnline = false; // since fox.logout() should not ever fail, this'll do
+      Log("^die sent by uid " + message.author.id + ", Discord bot offline");
     }
   }
 });
@@ -171,8 +190,10 @@ fox.on("message", function(message) {
   if (message.content == config.prefix + "set") {
     if (message.author.id == config.owner_id) {
       fox.reply(message, "You cannot change the config.json from Discord for safety reasons. Please use the CLI.");
+      Log("^set sent by uid " + message.author.id);
     } else {
       fox.reply(message, "**You do not have permission to run this command.**");
+      Log("^set sent by uid " + message.author.id + ", failed as uid doesn't match owner_id in config.json");
     }
   }
 });
@@ -181,8 +202,10 @@ fox.on("message", function(message) {
   if (message.content == config.prefix + "blacklist") {
     if (config.blacklist == null) {
       fox.reply(message, "I couldn't find a `blacklist` entry in config.json. Please contact the bot owner to correct this.");
+      Log("^blacklist sent by uid " + message.author.id + ", blacklist was not found in config.json");
     } else {
       fox.reply(message, "I found the blacklist! I'll be able to list who is in the blacklist soon:tm:");
+      Log("^blacklist sent by uid " + message.author.id);
     }
   }
 });
