@@ -21,7 +21,7 @@ if (config.EnableBotOnStart == false) {
 }
 
 // CLI variables
-var verString = "Fox CLI, version 0.1\nFox CLI is the command line interface for managing your Discord bot."; // If you would like to change the text that is said when you run "ver" in console, this is the place!
+var verString = "Fox CLI, version 0.1.1\nFox CLI is the command line interface for managing your Discord bot."; // If you would like to change the text that is said when you run "ver" in console, this is the place!
 var delimiter = "discord#"; // Customize your CLI the way you want it!
 
 // CLI commands (wip)
