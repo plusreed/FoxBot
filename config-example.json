@@ -1,4 +1,4 @@
-{
+™™{
 	"client_id" : "abc",
 	"token" : "abc",
 	"bot_id" : "abc",
@@ -6,5 +6,6 @@
 	"owner_id" : "abc",
 	"prefix" : "^",
 	"ver" : "v0.1",
+	"blacklist" : "soon",
 	"EnableBotOnStart" : false
 }

@@ -163,3 +163,13 @@ fox.on("message", function(message) {
     }
   }
 });
+
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "blacklisttest") {
+    if (config.blacklist == null) {
+      fox.reply(message, "I couldn't find a `blacklist` entry in config.json. Please contact the bot owner to correct this.");
+    } else {
+      fox.reply(message, "I found the blacklist! I'll be able to list who is in the blacklist soon:tm:");
+    }
+  }
+});
