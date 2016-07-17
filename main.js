@@ -42,6 +42,10 @@ vorpal
       // this.log("Currently at this time, you cannot shut off your bot after it is started. This functionality will be implemented later.".red);
       fox.loginWithToken(config.token);
       var BotOnline = true // EUGH
+      /* fox.setPlayingGame(config.default_game, function(error) {
+        this.log("Couldn't set playing game :(".red);
+      });
+      */
       callback();
     }
   });
@@ -101,6 +105,15 @@ vorpal
     process.exit();
   });
 
+vorpal
+  .command('setgame', 'Sets the game being played')
+  .action(function(args, callback) {
+    fox.setPlayingGame(args, function(error) {
+      this.log("couldn't set game");
+      callback();
+    });
+    callback();
+  });
 // Set CLI delimiter and do .show();
 vorpal
   .delimiter (delimiter)
@@ -165,11 +178,52 @@ fox.on("message", function(message) {
 });
 
 fox.on("message", function(message) {
-  if (message.content == config.prefix + "blacklisttest") {
+  if (message.content == config.prefix + "blacklist") {
     if (config.blacklist == null) {
       fox.reply(message, "I couldn't find a `blacklist` entry in config.json. Please contact the bot owner to correct this.");
     } else {
       fox.reply(message, "I found the blacklist! I'll be able to list who is in the blacklist soon:tm:");
+    }
+  }
+});
+
+// !!! INCOMING !!! UGLY COMMAND
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "echo") {
+    fox.reply(message.content.substring(0,6));
+  }
+});
+
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "goidle") {
+    if (message.author.id == config.owner_id) {
+      fox.setStatusIdle();
+      vorpal.log("Fox's status is now Idle...".yellow);
+    } else {
+      fox.reply(message, "lol no");
+    }
+  }
+});
+
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "goonline") {
+    if (message.author.id == config.owner_id) {
+      fox.setStatusOnline();
+      vorpal.log("Fox's status is now Online...".green);
+    } else {
+      fox.reply(message, "lol no");
+    }
+  }
+});
+
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "setgame") {
+    if (message.author.id == config.owner_id) {
+      fox.setPlayingGame(message.substring(0,8), function(error) {
+        fox.reply(message, "I couldn't set the game due to an error :(");
+      });
+    } else {
+      fox.reply(message, "lol no");
     }
   }
 });
