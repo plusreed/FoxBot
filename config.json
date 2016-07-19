@@ -1,0 +1,12 @@
+{
+	"client_id" : "203690382339342336",
+	"token" : "MjAzNjkwNDAwMzQ1NDg5NDA4.Cmsk9w.rvDRfAAVAkjzWkUAPf75_C2Tsx4",
+	"bot_id" : "203690400345489408",
+	"default_game" : "Not used... yet...",
+	"owner_id" : "89553652477358080",
+	"prefix" : "^",
+	"ver" : "v0.1",
+	"blacklist" : "lul",
+	"PollForMessages" : false,
+	"EnableBotOnStart" : false
+}

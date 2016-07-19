@@ -1,0 +1,1 @@
+I hate using git from the command line
