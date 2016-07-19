@@ -261,7 +261,7 @@ fox.on("message", function(message) {
 fox.on("message", function(message) {
   if (message.content == config.prefix + "stream") {
     if (message.author.id == config.owner_id) {
-      fox.setStreaming(config.stream_name, "https://twitch.tv/cyka", 1);
+      fox.setStreaming(config.stream_name, config.streamurl, 1);
     } else {
       fox.reply(message, "owo whats this"); // help
     }

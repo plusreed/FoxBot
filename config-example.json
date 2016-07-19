@@ -8,6 +8,7 @@
 	"ver" : "v0.1",
 	"blacklist" : "soon",
 	"streamname" : "a stream",
+	"streamurl" : "https://twitch.tv/cyka",
 	"PollForMessages" : false,
 	"EnableBotOnStart" : false
 }
