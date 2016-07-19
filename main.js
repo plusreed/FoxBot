@@ -121,8 +121,9 @@ vorpal
 vorpal
   .command('say', 'Say string in channel')
   .action(function(args, callback) {
-
+    // wip
   })
+
 // Set CLI delimiter and do .show();
 vorpal
   .delimiter (delimiter)
@@ -258,9 +259,9 @@ fox.on("message", function(message) {
 });
 
 fox.on("message", function(message) {
-  if (message.content == config.prefix + "streamingtest") {
+  if (message.content == config.prefix + "stream") {
     if (message.author.id == config.owner_id) {
-      fox.setStreaming("a stream", "https://twitch.tv/cyka", 1);
+      fox.setStreaming(config.stream_name, "https://twitch.tv/cyka", 1);
     } else {
       fox.reply(message, "owo whats this"); // help
     }

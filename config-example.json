@@ -7,6 +7,7 @@
 	"prefix" : "^",
 	"ver" : "v0.1",
 	"blacklist" : "soon",
+	"streamname" : "a stream",
 	"PollForMessages" : false,
 	"EnableBotOnStart" : false
 }
