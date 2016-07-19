@@ -4,7 +4,7 @@ var config = require('./config.json');
 var colors = require('colors');
 
 var PlaceHolderStrings = ["placeholder", "abc", "asdf"]; // unused atm, will be used later
-var BotOnline = config.EnableBotOnStart; // UGLYYYYYYY
+var BotOnline = false; // UGLYYYYYYY
 var fox = new Discord.Client();
 /* Discord bot variables
 var client_id = "",
