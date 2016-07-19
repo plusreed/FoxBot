@@ -117,6 +117,12 @@ vorpal
     });
     callback();
   });
+
+vorpal
+  .command('say', 'Say string in channel')
+  .action(function(args, callback) {
+
+  })
 // Set CLI delimiter and do .show();
 vorpal
   .delimiter (delimiter)
@@ -247,6 +253,16 @@ fox.on("message", function(message) {
       });
     } else {
       fox.reply(message, "lol no");
+    }
+  }
+});
+
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "streamingtest") {
+    if (message.author.id == config.owner_id) {
+      fox.setStreaming("a stream", "https://twitch.tv/cyka", 1);
+    } else {
+      fox.reply(message, "owo whats this"); // help
     }
   }
 });
