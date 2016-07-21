@@ -109,7 +109,7 @@ vorpal
   });
 
 vorpal
-  .command('setgame', 'Sets the game being played')
+  .command('set', 'Set various variables of the bot')
   .option('-g, --game <string>', 'The game your bot will play')
   .types({
     string: ['g', 'game']
