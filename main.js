@@ -111,14 +111,19 @@ vorpal
 vorpal
   .command('set', 'Set various variables of the bot')
   .option('-g, --game <string>', 'The game your bot will play')
+  .option('-sg, --streamgame',  'The name of the stream your bot will stream')
   .types({
     string: ['g', 'game']
   })
   .action(function(args, callback) {
-    fox.setPlayingGame(args.options.game, function(error) {
-      this.log("couldn't set game");
-      callback();
-    });
+    if (args.options.game != null) {
+      fox.setPlayingGame(args.options.game, function(error) {
+        this.log("couldn't set game");
+        callback();
+      });
+    } else if (args.options.streamgame != null) {
+      fox.setStreaming(args.options.streamgame, config.streamurl, 1);
+    }
     callback();
   });
 
