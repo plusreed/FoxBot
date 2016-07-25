@@ -6,13 +6,6 @@ var colors = require('colors');
 var PlaceHolderStrings = ["placeholder", "abc", "asdf"]; // unused atm, will be used later
 var BotOnline = config.EnableBotOnStart; // UGLYYYYYYY
 var fox = new Discord.Client();
-/* Discord bot variables
-var client_id = "",
-    token = "",
-    bot_id = "",
-    default_game = "",
-    EnableBotOnStart = false;
-// End Discord bot variables */
 
 // Various checks
 if (config.EnableBotOnStart == false) {
