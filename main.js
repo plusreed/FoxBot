@@ -16,6 +16,10 @@ if (config.EnableBotOnStart == false) {
 function Log(logmsg) {
   vorpal.log(logmsg);
 }
+
+function attachToGui(foxGui) {
+  // WIP
+}
 // CLI variables
 var verString = "Fox CLI, version 0.1.1\nFox CLI is the command line interface for managing your Discord bot."; // If you would like to change the text that is said when you run "ver" in console, this is the place!
 var delimiter = config.delimiter; // Customize your CLI the way you want it!
@@ -35,7 +39,6 @@ vorpal
     } else {
       // this.log("working on this");
       this.log("Token check passed! Please wait...".green);
-      // this.log("Currently at this time, you cannot shut off your bot after it is started. This functionality will be implemented later.".red);
       fox.loginWithToken(config.token);
       var BotOnline = true // EUGH
       /* fox.setPlayingGame(config.default_game, function(error) {
