@@ -146,6 +146,8 @@ fox.on("message", function(message) {
     Log(message.author.id + ": " + message.content);
   } else {
     Log("Message polling is disabled in config.json.");
+    var MsgPollShown = true;
+    return;
   }
 });
 
@@ -299,5 +301,45 @@ fox.on("message", function(message) {
     } else {
       fox.reply("You aren't the owner of the server! Send this command from within your own server or get the server owner to run this command.");
     }
+  }
+});
+/*
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "queue") {
+    // wip, need node-opus
+    // Iterate over all channels
+    for (var channel of message.channel.server.channels) {
+      // If the channel is a voice channel, ...
+        if (channel instanceof Discord.VoiceChannel) {
+            // ... reply with the channel name and the ID ...
+            fox.reply(message, channel.name + " - " + channel.id);
+            // ... and join the channel
+            fox.joinVoiceChannel(channel);
+            // Afterwards, break the loop so the bot doesn't join any other voice
+            // channels
+            break;
+        }
+      }
+    }
+  });
+*/
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "joinchan") {
+    var vc = message.author.voiceChannel;
+    // preliminary checks
+    if (vc == null) {
+      fox.reply(message, "you aren't in a voice channel!");
+    } else {
+      fox.joinVoiceChannel(vc);
+      fox.reply(message, "I joined " + vc.name + " (" + vc.id + ") successfully! Hello " + vc.name + "!");
+    }
+  }
+});
+
+fox.on("message", function(message) {
+  if (message.content == config.prefix + "leavechan") {
+    var vcInfo = message.author.voiceChannel;
+    fox.leaveVoiceChannel(vcInfo);
+    fox.reply(message, "Bye " + vcInfo.name + "! :wave:");
   }
 });
