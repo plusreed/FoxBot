@@ -37,7 +37,7 @@ vorpal
       this.log("There is a placeholder string in place of your token. Please correct this.".yellow);
       this.log("Can't continue, going back to CLI...");
       callback();
-    } else if (BotOnline == true) {
+    } else if (BotOnline == true) { // can this be replaced with a nicer solution?
       this.log("Your bot is already online, silly!");
       callback();
     } else {
@@ -45,10 +45,7 @@ vorpal
       this.log("Token check passed! Please wait...".green);
       fox.loginWithToken(config.token);
       var BotOnline = true // EUGH
-      /* fox.setPlayingGame(config.default_game, function(error) {
-        this.log("Couldn't set playing game :(".red);
-      });
-      */
+      fox.on('ready', () => { fox.setPlayingGame(config.default_game); });
       callback();
     }
   });
