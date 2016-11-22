@@ -8,7 +8,7 @@ var BotOnline = config.EnableBotOnStart; // UGLYYYYYYY
 var fox = new Discord.Client();
 
 // Various checks
-if (config.EnableBotOnStart == false) {
+if (config.EnableBotOnStart === false) {
   console.log("You have configured your bot to not start on execution of this script.");
   console.log("Start your bot by typing 'start' at the CLI.");
 }
