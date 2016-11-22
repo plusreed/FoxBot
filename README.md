@@ -2,7 +2,7 @@ Fox Bot
 ---
 [![Code Climate](https://codeclimate.com/github/plusreed/FoxBot/badges/gpa.svg)](https://codeclimate.com/github/plusreed/FoxBot)
 [![Test Coverage](https://codeclimate.com/github/plusreed/FoxBot/badges/coverage.svg)](https://codeclimate.com/github/plusreed/FoxBot/coverage)
-[![Issue Count](https://codeclimate.com/github/plusreed/FoxBot/badges/issue_count.svg)](https://codeclimate.com/github/plusreed/FoxBot)
+[![Issue Count](https://codeclimate.com/github/plusreed/FoxBot/badges/issue_count.svg)](https://codeclimate.com/github/plusreed/FoxBot) <br />
 A Discord bot written with discord.js with an interactive CLI <br />
 <br />
 **WARNING:** Please _don't_ use this for your Discord bot yet. This is a work-in-progress and it's functionality will be **very** limited for a while.
